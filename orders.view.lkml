@@ -16,7 +16,8 @@ view: orders {
       week,
       month,
       quarter,
-      year
+      year,
+      week_of_year
     ]
     sql: ${TABLE}.created_at ;;
   }
@@ -24,6 +25,11 @@ view: orders {
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
+  }
+
+  dimension: concat_status {
+    type: string
+    sql: CONCAT(${status}, '-' , ${created_week_of_year}) ;;
   }
 
   dimension: user_id {
